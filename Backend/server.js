@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const createConnection = require('./models/database');
-const UserController = require('./controller/userController');
+const UserController = require('./controllers/userControllers');
 
 const app = express();
 

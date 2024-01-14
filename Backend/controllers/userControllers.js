@@ -1,12 +1,12 @@
 const express = require('express');
-const UserModel = require("../models/userModel");
+const UserModel = require('../models/userModels');
 const router = express.Router();
 
 router.use(express.json());
 
 UserModel.initialize();
 
-router.post("/", async (req, res) => {
+router.post("/users", async (req, res) => {
     try {
         const {
             username, email, password, premiumUser
