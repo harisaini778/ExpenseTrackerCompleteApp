@@ -10,38 +10,37 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
     const formData = {
       email: emailRef.current.value,
       username: usernameRef.current.value,
       password: passwordRef.current.value,
-      premiumUser : 0,
+      premiumUser: 0,
     };
-
+  
     try {
       const response = await fetch('http://localhost:5000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-      email: emailRef.current.value,
-      username: usernameRef.current.value,
-      password: passwordRef.current.value,
-      premiumUser : 0,
-        }),
+        body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
+        await response.json(); // Consume the response data (optional)
         setShowAlert(true);
-        console.log(formData);
+        console.log("User created successfully");
       } else {
-        throw new Error('Failed to register user');
+        const errorText = await response.text();
+        console.error(`Failed to register user. Server response: ${errorText}`);
       }
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
     }
   };
+  
+  
 
   const handleSignIn = async (e) => {
     e.preventDefault();

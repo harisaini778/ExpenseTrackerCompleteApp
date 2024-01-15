@@ -1,4 +1,4 @@
-/* /backend/server.js */
+// server.js
 
 const express = require('express');
 const cors = require('cors');
@@ -12,10 +12,12 @@ const app = express();
 app.use(bodyParser.json());
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+  }));
 
 // Establish database connection
-createConnection(); // Assuming this function sets up your database connection
+createConnection();
 
 // User Controllers access
 app.use('/users', UserController);

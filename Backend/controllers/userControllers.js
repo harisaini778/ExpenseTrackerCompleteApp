@@ -1,3 +1,5 @@
+// controllers/userControllers.js
+
 const express = require('express');
 const UserModel = require('../models/userModels');
 const router = express.Router();

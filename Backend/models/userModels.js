@@ -1,3 +1,5 @@
+// models/userModels.js
+
 const createConnection = require("./database");
 
 const UserModel = {
