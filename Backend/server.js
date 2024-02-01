@@ -1,29 +1,21 @@
 // server.js
 
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const createConnection = require('./models/database');
-const UserController = require('./controllers/userControllers');
+const cors = require('cors');
+const userController = require('./controllers/userControllers');
 
 const app = express();
+const port = 5000;
 
-// Middleware to parse JSON in the request body
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
-// Enable CORS
-app.use(cors({
-    origin: 'http://localhost:3000',
-  }));
+app.post('/signup', userController.signup);
+app.post('/login', userController.login);
 
-// Establish database connection
-createConnection();
-
-// User Controllers access
-app.use('/users', UserController);
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}.`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
+
