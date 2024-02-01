@@ -2,8 +2,10 @@
 
 import React, { useRef, useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import {useNavigate} from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
@@ -37,6 +39,9 @@ const SignUp = () => {
         await response.json(); // Consume the response data (optional)
         setShowAlert(true);
         console.log(isLogin ? 'Login successful' : 'User created successfully');
+      if(isLogin) {
+        navigate('/expenses');
+      }
       } else {
         const errorText = await response.text();
         console.error(`Failed to ${isLogin ? 'login' : 'register user'}. Server response: ${errorText}`);
